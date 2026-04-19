@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Guest – Shower Song of the Day</title>
+  <meta name="description" content="Shower Song of the Day – Green Guest Timer mit YouTube-, Spotify- und Wasserfortschritts-Anzeige." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell"></div>
+
+  <main class="app">
+    <header class="hero-card">
+      <div class="hero-copy">
+        <p class="eyebrow">GREEN GUEST</p>
+        <h1>Shower Song of the Day</h1>
+        <p class="hero-text">
+          Dein Duschmoment mit Musik, Timer und sichtbarem Wasserfortschritt – im Stil der Green-Guest-CI.
+        </p>
+
+        <div class="quote-card">
+          <p class="quote-main">Your stay is more than a stay. It’s a positive impact.</p>
+          <p class="quote-sub">You are part of it.</p>
+        </div>
+      </div>
+
+      <div class="hero-brand">
+        <div class="brand-mark">GG<span class="leaf">◆</span></div>
+        <div class="brand-name">GREEN GUEST</div>
+        <div class="brand-divider"></div>
+        <p class="brand-support">Luxury hospitality meets conscious action.</p>
+      </div>
+    </header>
+
+    <section class="content-grid">
+      <article class="panel panel-links">
+        <div class="panel-header">
+          <p class="section-kicker">Music</p>
+          <h2>Links für den Dusch-Song</h2>
+        </div>
+
+        <div class="music-links">
+          <a id="youtubeAnchor" class="music-link youtube" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer">
+            <span class="music-label">YouTube Video</span>
+            <strong>Video öffnen</strong>
+          </a>
+          <a id="spotifyAnchor" class="music-link spotify" href="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT" target="_blank" rel="noopener noreferrer">
+            <span class="music-label">Spotify Song</span>
+            <strong>Song öffnen</strong>
+          </a>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>YouTube-Link</span>
+            <input id="youtubeInput" type="url" placeholder="https://www.youtube.com/watch?v=..." value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+          </label>
+          <label>
+            <span>Spotify-Link</span>
+            <input id="spotifyInput" type="url" placeholder="https://open.spotify.com/track/..." value="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT" />
+          </label>
+        </div>
+
+        <button id="saveLinksButton" class="btn btn-outline" type="button">Links speichern</button>
+      </article>
+
+      <article class="panel panel-timer">
+        <div class="panel-header">
+          <p class="section-kicker">Timer</p>
+          <h2>Wasserbalken für den Song</h2>
+        </div>
+
+        <div class="timer-topline">
+          <div>
+            <p class="timer-caption">Verbleibende Zeit</p>
+            <div id="timeDisplay" class="timer-display">03:00</div>
+          </div>
+          <div id="statusBadge" class="status-badge">Bereit</div>
+        </div>
+
+        <div class="timer-controls-top">
+          <label class="duration-field">
+            <span>Dauer in Minuten</span>
+            <input id="minutesInput" type="number" min="1" max="30" value="3" />
+          </label>
+        </div>
+
+        <div class="water-stage">
+          <div class="tank-card">
+            <div class="tank">
+              <div id="waterFill" class="water-fill">
+                <div class="wave wave-1"></div>
+                <div class="wave wave-2"></div>
+              </div>
+              <div class="tank-shine"></div>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <p class="progress-title">Wasserfortschritt</p>
+            <div class="progress-track">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p id="progressText" class="progress-text">0% gefüllt</p>
+
+            <div class="button-row">
+              <button id="startButton" class="btn btn-primary" type="button">Start</button>
+              <button id="pauseButton" class="btn btn-secondary" type="button">Pause</button>
+              <button id="resetButton" class="btn btn-ghost" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="brand-strip panel">
+      <div>
+        <p class="section-kicker">Brand note</p>
+        <h2>CI-Umsetzung</h2>
+        <p>
+          Farben, Typografie und Stimmung sind auf Basis der bereitgestellten Green-Guest-Unterlagen angelegt.
+          Die Seite nutzt elegante Serif-Titel, klare Montserrat-Lesetypografie, warme Beige-Flächen,
+          dunkles Grün, Gold-Akzente und eine ruhige Premium-Anmutung.
+        </p>
+      </div>
+      <div class="brand-images">
+        <img src="assets/brand-card.jpg" alt="Green Guest Brand Card" />
+        <img src="assets/logo-variants.jpg" alt="Green Guest Logo Varianten" />
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
