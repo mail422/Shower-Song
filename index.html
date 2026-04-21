@@ -14,16 +14,16 @@
     <section class="hero-card">
       <div class="brand-row">
         <div>
-          <p class="eyebrow"></p>
+          <p class="eyebrow" data-i18n="eyebrow"></p>
           <h1 data-i18n="heroTitle">🚿 Shower Song of the Day</h1>
 
-<div class="language-switcher">
-  <button class="lang-btn active" data-lang="de">DE</button>
-  <button class="lang-btn" data-lang="en">EN</button>
-  <button class="lang-btn" data-lang="fr">FR</button>
-</div>
+          <div class="language-switcher">
+            <button class="lang-btn active" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+          </div>
 
-<p class="subtitle" data-i18n="heroSubtitle">Spiele den hinterlegten Song ab und verfolge live deinen Wasserverbrauch und wie viel Wasser du gespart hast.</p>
+          <p class="subtitle" data-i18n="heroSubtitle">Spiele den hinterlegten Song ab und verfolge live deinen Wasserverbrauch und wie viel Wasser du gespart hast.</p>
         </div>
         <img src="assets/logo-variants.jpg" alt="Green Guest Logo" class="brand-logo" />
       </div>
@@ -31,10 +31,10 @@
       <div class="content-grid">
         <section class="video-panel card">
           <div class="panel-header">
-            <h2>Song-Vorschau</h2>
+            <h2 data-i18n="songPreviewTitle">Song-Vorschau</h2>
             <div class="link-actions">
-              <a id="youtubeButton" class="pill-button primary-link" href="#" target="_blank" rel="noopener noreferrer">YouTube öffnen</a>
-              <a id="spotifyButton" class="pill-button secondary-link" href="#" target="_blank" rel="noopener noreferrer">Spotify öffnen</a>
+              <a id="youtubeButton" class="pill-button primary-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="openYoutube">YouTube öffnen</a>
+              <a id="spotifyButton" class="pill-button secondary-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="openSpotify">Spotify öffnen</a>
             </div>
           </div>
 
@@ -42,17 +42,20 @@
             <div id="player"></div>
           </div>
 
-          <p class="small-note">Der Timer folgt automatisch dem YouTube-Video. Für externes Abspielen, z. B. über Spotify, kannst du die manuellen Buttons darunter verwenden.</p>
+          <p class="small-note" data-i18n="smallNote">Der Timer folgt automatisch dem YouTube-Video. Für externes Abspielen, z. B. über Spotify, kannst du die manuellen Buttons darunter verwenden.</p>
         </section>
 
         <section class="stats-panel card">
           <div class="panel-header compact">
-            <h2>Shower Timer</h2>
-            <span id="playbackState" class="state-badge">Bereit</span>
+            <h2 data-i18n="showerTimerTitle">Shower Timer</h2>
+            <span id="playbackState" class="state-badge" data-i18n="statusReady">Bereit</span>
           </div>
 
           <div class="timer-readout" id="timeDisplay">00:00</div>
-          <p class="timer-subline">Videodauer: <span id="totalDurationLabel">wird geladen …</span></p>
+          <p class="timer-subline">
+            <span data-i18n="videoDurationLabel">Videodauer:</span>
+            <span id="totalDurationLabel" data-i18n="loadingDuration">wird geladen …</span>
+          </p>
 
           <div class="tank-and-stats">
             <div class="tank" aria-label="Wasserstand">
@@ -61,15 +64,15 @@
 
             <div class="metric-stack">
               <div class="metric-card">
-                <span class="metric-label">Verbraucht</span>
+                <span class="metric-label" data-i18n="waterUsedLabel">Verbraucht</span>
                 <strong id="litersUsed">0,0 L</strong>
               </div>
               <div class="metric-card">
-                <span class="metric-label">Noch einsparbar</span>
+                <span class="metric-label" data-i18n="waterSaveableLabel">Noch einsparbar</span>
                 <strong id="litersSaved">0,0 L</strong>
               </div>
               <div class="metric-card">
-                <span class="metric-label">Durchschnitt</span>
+                <span class="metric-label" data-i18n="averageLabel">Durchschnitt</span>
                 <strong id="flowRateLabel">10,0 L/min</strong>
               </div>
             </div>
@@ -77,7 +80,7 @@
 
           <div class="progress-block">
             <div class="progress-head">
-              <span>Song-Fortschritt</span>
+              <span data-i18n="songProgressLabel">Song-Fortschritt</span>
               <span id="progressLabel">0%</span>
             </div>
             <div class="progress-bar">
@@ -86,9 +89,9 @@
           </div>
 
           <div class="controls">
-            <button id="startBtn" class="pill-button primary">Start</button>
-            <button id="pauseBtn" class="pill-button secondary">Pause</button>
-            <button id="resetBtn" class="pill-button ghost">Reset</button>
+            <button id="startBtn" class="pill-button primary" data-i18n="startBtn">Start</button>
+            <button id="pauseBtn" class="pill-button secondary" data-i18n="pauseBtn">Pause</button>
+            <button id="resetBtn" class="pill-button ghost" data-i18n="resetBtn">Reset</button>
           </div>
         </section>
       </div>
