@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Guest – Shower Song</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-card">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">Green Guest</p>
+          <h1>Shower Song of the Day</h1>
+          <p class="lead">Spiele den hinterlegten Song ab und verfolge live Zeit, Wasserverbrauch und noch vermeidbaren Verbrauch.</p>
+        </div>
+        <img src="assets/logo-variants.jpg" alt="Green Guest Logo" class="brand-logo" />
+      </div>
+
+      <div class="content-grid">
+        <section class="video-panel card">
+          <div class="panel-header">
+            <h2>Song-Vorschau</h2>
+            <div class="link-actions">
+              <a id="youtubeButton" class="pill-button primary-link" href="#" target="_blank" rel="noopener noreferrer">YouTube öffnen</a>
+              <a id="spotifyButton" class="pill-button secondary-link" href="#" target="_blank" rel="noopener noreferrer">Spotify öffnen</a>
+            </div>
+          </div>
+
+          <div class="video-frame-wrap">
+            <div id="player"></div>
+          </div>
+
+          <p class="small-note">Der Timer folgt automatisch dem YouTube-Video. Für externes Abspielen, z. B. über Spotify, kannst du die manuellen Buttons darunter verwenden.</p>
+        </section>
+
+        <section class="stats-panel card">
+          <div class="panel-header compact">
+            <h2>Shower Timer</h2>
+            <span id="playbackState" class="state-badge">Bereit</span>
+          </div>
+
+          <div class="timer-readout" id="timeDisplay">00:00</div>
+          <p class="timer-subline">Videodauer: <span id="totalDurationLabel">wird geladen …</span></p>
+
+          <div class="tank-and-stats">
+            <div class="tank" aria-label="Wasserstand">
+              <div class="water" id="waterFill"></div>
+            </div>
+
+            <div class="metric-stack">
+              <div class="metric-card">
+                <span class="metric-label">Verbraucht</span>
+                <strong id="litersUsed">0,0 L</strong>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Noch einsparbar</span>
+                <strong id="litersSaved">0,0 L</strong>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Durchschnitt</span>
+                <strong id="flowRateLabel">10,0 L/min</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-head">
+              <span>Song-Fortschritt</span>
+              <span id="progressLabel">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="startBtn" class="pill-button primary">Start</button>
+            <button id="pauseBtn" class="pill-button secondary">Pause</button>
+            <button id="resetBtn" class="pill-button ghost">Reset</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
