@@ -12,12 +12,169 @@ const SONG_CONFIG = {
 
 /*
   Es gibt keinen einzelnen weltweit einheitlichen offiziellen Durchschnittswert
-  für Duschwasser pro Sekunde. Diese Demo nutzt 10,0 L/min als realistischen
+  für Duschwasser pro Sekunde. Diese Demo nutzt 8,5 L/min als realistischen
   Standardwert für eine konventionelle Dusche.
 */
 const SHOWER_FLOW_LITERS_PER_MINUTE = 8.5;
 const SHOWER_FLOW_LITERS_PER_SECOND = SHOWER_FLOW_LITERS_PER_MINUTE / 60;
 
+/*
+  ==========================================================
+  ÜBERSETZUNGEN
+  ==========================================================
+*/
+const translations = {
+  de: {
+    eyebrow: '',
+    heroTitle: '🚿 Shower Song of the Day',
+    heroSubtitle: 'Spiele den hinterlegten Song ab und verfolge live deinen Wasserverbrauch und wie viel Wasser du gespart hast.',
+    songPreviewTitle: 'Song-Vorschau',
+    openYoutube: 'YouTube öffnen',
+    openSpotify: 'Spotify öffnen',
+    smallNote: 'Der Timer folgt automatisch dem YouTube-Video. Für externes Abspielen, z. B. über Spotify, kannst du die manuellen Buttons darunter verwenden.',
+    showerTimerTitle: 'Shower Timer',
+    statusReady: 'Bereit',
+    statusVideoPlaying: 'Video läuft',
+    statusVideoPaused: 'Video pausiert',
+    statusManualRunning: 'Manuell läuft',
+    statusManualPaused: 'Manuell pausiert',
+    statusEnded: 'Beendet',
+    statusLoading: 'Lädt',
+    videoDurationLabel: 'Videodauer:',
+    loadingDuration: 'wird geladen …',
+    unknownDuration: 'unbekannt',
+    waterUsedLabel: 'Verbraucht',
+    waterSaveableLabel: 'Noch einsparbar',
+    averageLabel: 'Durchschnitt',
+    songProgressLabel: 'Song-Fortschritt',
+    startBtn: 'Start',
+    pauseBtn: 'Pause',
+    resetBtn: 'Reset',
+    litersPerMinute: '{value} L/min',
+    progressPercent: '{value}%',
+  },
+  en: {
+    eyebrow: '',
+    heroTitle: '🚿 Shower Song of the Day',
+    heroSubtitle: 'Play the selected song and track your water usage live, including how much water you have saved.',
+    songPreviewTitle: 'Song Preview',
+    openYoutube: 'Open YouTube',
+    openSpotify: 'Open Spotify',
+    smallNote: 'The timer follows the YouTube video automatically. For external playback, for example via Spotify, you can use the manual buttons below.',
+    showerTimerTitle: 'Shower Timer',
+    statusReady: 'Ready',
+    statusVideoPlaying: 'Video playing',
+    statusVideoPaused: 'Video paused',
+    statusManualRunning: 'Manual mode running',
+    statusManualPaused: 'Manual mode paused',
+    statusEnded: 'Finished',
+    statusLoading: 'Loading',
+    videoDurationLabel: 'Video duration:',
+    loadingDuration: 'loading …',
+    unknownDuration: 'unknown',
+    waterUsedLabel: 'Used',
+    waterSaveableLabel: 'Still saveable',
+    averageLabel: 'Average',
+    songProgressLabel: 'Song Progress',
+    startBtn: 'Start',
+    pauseBtn: 'Pause',
+    resetBtn: 'Reset',
+    litersPerMinute: '{value} L/min',
+    progressPercent: '{value}%',
+  },
+  fr: {
+    eyebrow: '',
+    heroTitle: '🚿 Chanson de douche du jour',
+    heroSubtitle: 'Lancez la chanson sélectionnée et suivez en direct votre consommation d’eau ainsi que la quantité économisée.',
+    songPreviewTitle: 'Aperçu de la chanson',
+    openYoutube: 'Ouvrir YouTube',
+    openSpotify: 'Ouvrir Spotify',
+    smallNote: 'Le minuteur suit automatiquement la vidéo YouTube. Pour une lecture externe, par exemple via Spotify, vous pouvez utiliser les boutons manuels ci-dessous.',
+    showerTimerTitle: 'Minuteur de douche',
+    statusReady: 'Prêt',
+    statusVideoPlaying: 'Vidéo en lecture',
+    statusVideoPaused: 'Vidéo en pause',
+    statusManualRunning: 'Mode manuel en cours',
+    statusManualPaused: 'Mode manuel en pause',
+    statusEnded: 'Terminé',
+    statusLoading: 'Chargement',
+    videoDurationLabel: 'Durée de la vidéo :',
+    loadingDuration: 'chargement …',
+    unknownDuration: 'inconnue',
+    waterUsedLabel: 'Consommé',
+    waterSaveableLabel: 'Encore économisable',
+    averageLabel: 'Moyenne',
+    songProgressLabel: 'Progression de la chanson',
+    startBtn: 'Démarrer',
+    pauseBtn: 'Pause',
+    resetBtn: 'Réinitialiser',
+    litersPerMinute: '{value} L/min',
+    progressPercent: '{value}%',
+  }
+};
+
+/*
+  ==========================================================
+  SPRACHE
+  ==========================================================
+*/
+const savedLanguage = localStorage.getItem('showerSongLanguage');
+
+let currentLanguage = 'de';
+
+if (savedLanguage) {
+  currentLanguage = savedLanguage;
+} else {
+  const browserLang = navigator.language.toLowerCase();
+
+  if (browserLang.startsWith('fr')) {
+    currentLanguage = 'fr';
+  } else if (browserLang.startsWith('en')) {
+    currentLanguage = 'en';
+  } else {
+    currentLanguage = 'de';
+  }
+}
+
+function t(key, vars = {}) {
+  let text = translations[currentLanguage]?.[key] ?? translations.de[key] ?? key;
+
+  Object.keys(vars).forEach((varKey) => {
+    text = text.replace(`{${varKey}}`, vars[varKey]);
+  });
+
+  return text;
+}
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem('showerSongLanguage', lang);
+  applyTranslations();
+}
+
+function updateLanguageButtons() {
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
+  });
+}
+
+function applyTranslations() {
+  document.documentElement.lang = currentLanguage;
+
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const key = element.dataset.i18n;
+    element.textContent = t(key);
+  });
+
+  updateDynamicLabels();
+  updateLanguageButtons();
+}
+
+/*
+  ==========================================================
+  DOM ELEMENTE
+  ==========================================================
+*/
 const youtubeButton = document.getElementById('youtubeButton');
 const spotifyButton = document.getElementById('spotifyButton');
 const playbackState = document.getElementById('playbackState');
@@ -41,10 +198,25 @@ let isManualMode = false;
 let manualAnimationFrame = null;
 let manualLastTick = null;
 
-flowRateLabel.textContent = `${formatNumber(SHOWER_FLOW_LITERS_PER_MINUTE)} L/min`;
+/*
+  ==========================================================
+  INITIAL SETUP
+  ==========================================================
+*/
 youtubeButton.href = SONG_CONFIG.youtubeUrl;
 spotifyButton.href = SONG_CONFIG.spotifyUrl;
 
+document.querySelectorAll('.lang-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setLanguage(btn.dataset.lang);
+  });
+});
+
+/*
+  ==========================================================
+  HELFER
+  ==========================================================
+*/
 function extractYouTubeVideoId(url) {
   try {
     const parsed = new URL(url);
@@ -73,16 +245,38 @@ function formatTime(total) {
 }
 
 function formatNumber(value) {
-  return value.toLocaleString('de-DE', {
+  return value.toLocaleString(currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'en' ? 'en-US' : 'de-DE', {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   });
 }
 
-function setStateLabel(label) {
-  playbackState.textContent = label;
+function setStateLabel(key) {
+  playbackState.textContent = t(key);
 }
 
+function updateDynamicLabels() {
+  flowRateLabel.textContent = t('litersPerMinute', {
+    value: formatNumber(SHOWER_FLOW_LITERS_PER_MINUTE),
+  });
+
+  const progressPercent = totalSeconds > 0 ? Math.round((currentSeconds / totalSeconds) * 100) : 0;
+  progressLabel.textContent = t('progressPercent', {
+    value: progressPercent,
+  });
+
+  if (totalSeconds > 0) {
+    totalDurationLabel.textContent = formatTime(totalSeconds);
+  } else {
+    totalDurationLabel.textContent = t('loadingDuration');
+  }
+}
+
+/*
+  ==========================================================
+  YOUTUBE SYNC + UI
+  ==========================================================
+*/
 function syncFromYouTube() {
   if (!player || typeof player.getDuration !== 'function') return;
 
@@ -104,7 +298,6 @@ function updateUI() {
   const progressPercent = totalSeconds > 0 ? (playedSeconds / totalSeconds) * 100 : 0;
 
   timeDisplay.textContent = formatTime(playedSeconds);
-  progressLabel.textContent = `${Math.round(progressPercent)}%`;
   progressFill.style.width = `${progressPercent}%`;
   waterFill.style.height = `${progressPercent}%`;
 
@@ -113,6 +306,8 @@ function updateUI() {
 
   litersUsed.textContent = `${formatNumber(usedLiters)} L`;
   litersSaved.textContent = `${formatNumber(saveableLiters)} L`;
+
+  updateDynamicLabels();
 }
 
 function startUiPolling() {
@@ -127,6 +322,11 @@ function stopUiPolling() {
   }
 }
 
+/*
+  ==========================================================
+  MANUELLER TIMER
+  ==========================================================
+*/
 function stopManualLoop() {
   if (manualAnimationFrame) {
     cancelAnimationFrame(manualAnimationFrame);
@@ -144,7 +344,7 @@ function runManualLoop(timestamp) {
   updateUI();
 
   if (currentSeconds >= totalSeconds && totalSeconds > 0) {
-    setStateLabel('Beendet');
+    setStateLabel('statusEnded');
     stopManualLoop();
     return;
   }
@@ -159,17 +359,17 @@ function startManualMode() {
 
   if (!totalSeconds && player && typeof player.getDuration === 'function') {
     totalSeconds = Number(player.getDuration()) || 0;
-    totalDurationLabel.textContent = totalSeconds > 0 ? formatTime(totalSeconds) : 'unbekannt';
+    totalDurationLabel.textContent = totalSeconds > 0 ? formatTime(totalSeconds) : t('unknownDuration');
   }
 
-  setStateLabel('Manuell läuft');
+  setStateLabel('statusManualRunning');
   manualAnimationFrame = requestAnimationFrame(runManualLoop);
 }
 
 function pauseManualMode() {
   isManualMode = true;
   stopManualLoop();
-  setStateLabel('Manuell pausiert');
+  setStateLabel('statusManualPaused');
 }
 
 function resetAll() {
@@ -178,7 +378,7 @@ function resetAll() {
   isManualMode = false;
   currentSeconds = 0;
   updateUI();
-  setStateLabel('Bereit');
+  setStateLabel('statusReady');
 
   if (player && typeof player.pauseVideo === 'function') {
     player.pauseVideo();
@@ -187,6 +387,11 @@ function resetAll() {
   }
 }
 
+/*
+  ==========================================================
+  YOUTUBE PLAYER
+  ==========================================================
+*/
 window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
   const videoId = extractYouTubeVideoId(SONG_CONFIG.youtubeUrl);
 
@@ -208,7 +413,7 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
 
 function handlePlayerReady() {
   syncFromYouTube();
-  setStateLabel('Bereit');
+  setStateLabel('statusReady');
 }
 
 function handlePlayerStateChange(event) {
@@ -218,7 +423,7 @@ function handlePlayerStateChange(event) {
     isManualMode = false;
     stopManualLoop();
     startUiPolling();
-    setStateLabel('Video läuft');
+    setStateLabel('statusVideoPlaying');
     syncFromYouTube();
     return;
   }
@@ -226,7 +431,7 @@ function handlePlayerStateChange(event) {
   if (state === YT.PlayerState.PAUSED) {
     stopUiPolling();
     syncFromYouTube();
-    setStateLabel('Video pausiert');
+    setStateLabel('statusVideoPaused');
     return;
   }
 
@@ -235,15 +440,20 @@ function handlePlayerStateChange(event) {
     syncFromYouTube();
     currentSeconds = totalSeconds;
     updateUI();
-    setStateLabel('Beendet');
+    setStateLabel('statusEnded');
     return;
   }
 
   if (state === YT.PlayerState.BUFFERING) {
-    setStateLabel('Lädt');
+    setStateLabel('statusLoading');
   }
 }
 
+/*
+  ==========================================================
+  BUTTON EVENTS
+  ==========================================================
+*/
 startBtn.addEventListener('click', () => {
   if (player && typeof player.getPlayerState === 'function') {
     const currentState = player.getPlayerState();
@@ -264,4 +474,12 @@ pauseBtn.addEventListener('click', () => {
 });
 
 resetBtn.addEventListener('click', resetAll);
+
+/*
+  ==========================================================
+  START
+  ==========================================================
+*/
+applyTranslations();
 updateUI();
+setStateLabel('statusReady');
