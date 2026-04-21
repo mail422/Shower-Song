@@ -15,7 +15,7 @@ const SONG_CONFIG = {
   für Duschwasser pro Sekunde. Diese Demo nutzt 10,0 L/min als realistischen
   Standardwert für eine konventionelle Dusche.
 */
-const SHOWER_FLOW_LITERS_PER_MINUTE = 10.0;
+const SHOWER_FLOW_LITERS_PER_MINUTE = 8.5;
 const SHOWER_FLOW_LITERS_PER_SECOND = SHOWER_FLOW_LITERS_PER_MINUTE / 60;
 
 const youtubeButton = document.getElementById('youtubeButton');
